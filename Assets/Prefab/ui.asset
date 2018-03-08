@@ -1,0 +1,382 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec4882d68a9346b3b5f8ecf1e38a534, type: 3}
+  m_Name: ui
+  m_EditorClassIdentifier: 
+  m_allNodes:
+  - m_name: MenuPanel
+    m_id: a5aec204-1f8a-46a4-a04e-8dbe0b881250
+    m_x: 192
+    m_y: 132
+    m_node: {fileID: 114272642020946232}
+    m_inputPoints:
+    - id: cb316054-4a8f-42b1-9c52-850e4b38ac5c
+      label: 
+      parentId: a5aec204-1f8a-46a4-a04e-8dbe0b881250
+      isInput: 1
+      buttonRect:
+        serializedVersion: 2
+        x: 0
+        y: 18.5
+        width: 21
+        height: 29
+      max: 100
+      type: bridge
+    m_outputPoints:
+    - id: 36ad54f7-502c-45ba-a712-2e578ff69151
+      label: 
+      parentId: a5aec204-1f8a-46a4-a04e-8dbe0b881250
+      isInput: 0
+      buttonRect:
+        serializedVersion: 2
+        x: 111
+        y: 21.5
+        width: 10
+        height: 23
+      max: 100
+      type: bridge
+  - m_name: SettingPanel
+    m_id: 299f4399-6b1b-4c67-9a92-3b01cc96156c
+    m_x: 396
+    m_y: 252
+    m_node: {fileID: 114207400718670808}
+    m_inputPoints:
+    - id: 16077cf2-636c-47d1-9b1f-10609286922b
+      label: 
+      parentId: 299f4399-6b1b-4c67-9a92-3b01cc96156c
+      isInput: 1
+      buttonRect:
+        serializedVersion: 2
+        x: 0
+        y: 18.5
+        width: 21
+        height: 29
+      max: 100
+      type: bridge
+    m_outputPoints:
+    - id: e4f1857e-3c43-4d91-a138-22dd038d71e5
+      label: 
+      parentId: 299f4399-6b1b-4c67-9a92-3b01cc96156c
+      isInput: 0
+      buttonRect:
+        serializedVersion: 2
+        x: 114
+        y: 21.5
+        width: 10
+        height: 23
+      max: 100
+      type: bridge
+  - m_name: Luncher
+    m_id: 43fe55af-72f8-4dbc-8b9a-a07842d364af
+    m_x: 12
+    m_y: 48
+    m_node: {fileID: 114054337197708374}
+    m_inputPoints: []
+    m_outputPoints:
+    - id: b6bffeb0-5403-4ddf-aff5-eec65e1a0f9e
+      label: +
+      parentId: 43fe55af-72f8-4dbc-8b9a-a07842d364af
+      isInput: 0
+      buttonRect:
+        serializedVersion: 2
+        x: 111
+        y: 21.5
+        width: 10
+        height: 23
+      max: 100
+      type: bridge
+  - m_name: PlayingPanel
+    m_id: 9ad60378-d867-42a6-8ab3-234f25893c81
+    m_x: 396
+    m_y: 180
+    m_node: {fileID: 114058701909741406}
+    m_inputPoints:
+    - id: 38702515-62d3-4f40-8fe6-4a798b722049
+      label: 
+      parentId: 9ad60378-d867-42a6-8ab3-234f25893c81
+      isInput: 1
+      buttonRect:
+        serializedVersion: 2
+        x: 0
+        y: 18.5
+        width: 21
+        height: 29
+      max: 100
+      type: bridge
+    m_outputPoints:
+    - id: efd1b1f2-d8bb-4aa3-a027-333e8d5651b0
+      label: 
+      parentId: 9ad60378-d867-42a6-8ab3-234f25893c81
+      isInput: 0
+      buttonRect:
+        serializedVersion: 2
+        x: 115
+        y: 21.5
+        width: 10
+        height: 23
+      max: 100
+      type: bridge
+  - m_name: RecordPanel
+    m_id: 85291c4d-d907-47c2-b869-ea998ef18994
+    m_x: 396
+    m_y: 108
+    m_node: {fileID: 114508100344136576}
+    m_inputPoints:
+    - id: 350e292e-3618-4b15-bbd1-4379eb1601ae
+      label: 
+      parentId: 85291c4d-d907-47c2-b869-ea998ef18994
+      isInput: 1
+      buttonRect:
+        serializedVersion: 2
+        x: 0
+        y: 18.5
+        width: 21
+        height: 29
+      max: 100
+      type: bridge
+    m_outputPoints:
+    - id: b40efd6b-89f2-4ef4-80f6-670fa6271d3d
+      label: 
+      parentId: 85291c4d-d907-47c2-b869-ea998ef18994
+      isInput: 0
+      buttonRect:
+        serializedVersion: 2
+        x: 114
+        y: 21.5
+        width: 10
+        height: 23
+      max: 100
+      type: bridge
+  m_allConnections:
+  - m_id: bd1dc403-b6a1-47a0-9e14-c956d415e489
+    m_fromNodeId: a5aec204-1f8a-46a4-a04e-8dbe0b881250
+    m_fromNodeConnectionPointId: 36ad54f7-502c-45ba-a712-2e578ff69151
+    m_toNodeId: 299f4399-6b1b-4c67-9a92-3b01cc96156c
+    m_toNodeConnectionPoiontId: 16077cf2-636c-47d1-9b1f-10609286922b
+    m_type: bridge
+    m_connection: {fileID: 114905935790206248}
+  - m_id: c187a7c1-20d4-46ad-b472-bea9425ab341
+    m_fromNodeId: 43fe55af-72f8-4dbc-8b9a-a07842d364af
+    m_fromNodeConnectionPointId: b6bffeb0-5403-4ddf-aff5-eec65e1a0f9e
+    m_toNodeId: a5aec204-1f8a-46a4-a04e-8dbe0b881250
+    m_toNodeConnectionPoiontId: cb316054-4a8f-42b1-9c52-850e4b38ac5c
+    m_type: bridge
+    m_connection: {fileID: 114018023342367324}
+  - m_id: 2a113c44-8e8f-4e36-a350-3ea2742ef27d
+    m_fromNodeId: a5aec204-1f8a-46a4-a04e-8dbe0b881250
+    m_fromNodeConnectionPointId: 36ad54f7-502c-45ba-a712-2e578ff69151
+    m_toNodeId: 9ad60378-d867-42a6-8ab3-234f25893c81
+    m_toNodeConnectionPoiontId: 38702515-62d3-4f40-8fe6-4a798b722049
+    m_type: bridge
+    m_connection: {fileID: 114553525863639080}
+  - m_id: 65d08a31-f432-49c9-9489-0e04e9206fb5
+    m_fromNodeId: a5aec204-1f8a-46a4-a04e-8dbe0b881250
+    m_fromNodeConnectionPointId: 36ad54f7-502c-45ba-a712-2e578ff69151
+    m_toNodeId: 85291c4d-d907-47c2-b869-ea998ef18994
+    m_toNodeConnectionPoiontId: 350e292e-3618-4b15-bbd1-4379eb1601ae
+    m_type: bridge
+    m_connection: {fileID: 114804202904979926}
+  m_lastModified: 131650227665322797
+  m_graphDescription: 
+  m_controllerType: BridgeUI.BridgeUIGraphCtrl
+  m_panelNamePath: 
+--- !u!114 &114018023342367324
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2bcf91097135a8449520bf75b8b99d9, type: 3}
+  m_Name: BridgeConnection
+  m_EditorClassIdentifier: 
+  index: 0
+  show:
+    auto: 1
+    mutex: 0
+    cover: 0
+    baseShow: 0
+    single: 0
+--- !u!114 &114054337197708374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675bf750736914440bad550322193fba, type: 3}
+  m_Name: Luncher
+  m_EditorClassIdentifier: 
+  a: 0
+--- !u!114 &114058701909741406
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e9259400e78dc4e9dcf1f2f3215a73, type: 3}
+  m_Name: PanelNode
+  m_EditorClassIdentifier: 
+  instenceID: 0
+  description: "\u4F20\u52A8\u64AD\u653E\u9762\u677F"
+  assetName: PlayingPanel
+  style: 1
+  nodeType: 31
+  nodeInfo:
+    uiType:
+      layerIndex: 0
+      form: 0
+      layer: 0
+      hideAlaph: 0
+      enterAnim: 0
+      quitAnim: 0
+      closeRule: 0
+      hideRule: 0
+    prefabGuid: 6f10f23e982c5884ea2dfef2f889035f
+--- !u!114 &114207400718670808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e9259400e78dc4e9dcf1f2f3215a73, type: 3}
+  m_Name: PanelNode
+  m_EditorClassIdentifier: 
+  instenceID: 0
+  description: "\u57FA\u672C\u8BBE\u7F6E\u9762\u677F"
+  assetName: SettingPanel
+  style: 1
+  nodeType: 15
+  nodeInfo:
+    uiType:
+      layerIndex: 0
+      form: 0
+      layer: 0
+      hideAlaph: 0
+      enterAnim: 1
+      quitAnim: 0
+      closeRule: 0
+      hideRule: 0
+    prefabGuid: 09f4bd1368d42ba4597aa834d74036dc
+--- !u!114 &114272642020946232
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e9259400e78dc4e9dcf1f2f3215a73, type: 3}
+  m_Name: PanelNode
+  m_EditorClassIdentifier: 
+  instenceID: 0
+  description: "\u83DC\u5355\u754C\u9762"
+  assetName: MenuPanel
+  style: 2
+  nodeType: 27
+  nodeInfo:
+    uiType:
+      layerIndex: 0
+      form: 0
+      layer: 0
+      hideAlaph: 0.2
+      enterAnim: 0
+      quitAnim: 0
+      closeRule: 0
+      hideRule: 1
+    prefabGuid: fd3e5561354d4a1499fbba68bbcacd33
+--- !u!114 &114508100344136576
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e9259400e78dc4e9dcf1f2f3215a73, type: 3}
+  m_Name: PanelNode
+  m_EditorClassIdentifier: 
+  instenceID: 0
+  description: "\u72B6\u6001\u8BB0\u5F55\u9762\u677F"
+  assetName: RecordPanel
+  style: 1
+  nodeType: 31
+  nodeInfo:
+    uiType:
+      layerIndex: 0
+      form: 0
+      layer: 0
+      hideAlaph: 0
+      enterAnim: 0
+      quitAnim: 0
+      closeRule: 0
+      hideRule: 0
+    prefabGuid: bf0a35f6b653ac94fa3a7c2efe8269c4
+--- !u!114 &114553525863639080
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2bcf91097135a8449520bf75b8b99d9, type: 3}
+  m_Name: BridgeConnection
+  m_EditorClassIdentifier: 
+  index: 1
+  show:
+    auto: 0
+    mutex: 0
+    cover: 0
+    baseShow: 1
+    single: 0
+--- !u!114 &114804202904979926
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2bcf91097135a8449520bf75b8b99d9, type: 3}
+  m_Name: BridgeConnection
+  m_EditorClassIdentifier: 
+  index: 0
+  show:
+    auto: 0
+    mutex: 0
+    cover: 0
+    baseShow: 1
+    single: 0
+--- !u!114 &114905935790206248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2bcf91097135a8449520bf75b8b99d9, type: 3}
+  m_Name: BridgeConnection
+  m_EditorClassIdentifier: 
+  index: 2
+  show:
+    auto: 0
+    mutex: 0
+    cover: 0
+    baseShow: 1
+    single: 0
