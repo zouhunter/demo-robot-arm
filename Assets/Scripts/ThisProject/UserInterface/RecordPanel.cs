@@ -11,22 +11,24 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using BridgeUI;
-
+using PureMVC;
 /// <summary>
 /// MonoBehaiver
 /// <summary>
-public class RecordPanel : SingleCloseAblePanel {
+public class RecordPanel : SingleCloseAblePanel
+{
     [SerializeField]
     private Toggle m_pickup;
     [SerializeField]
     private Button m_save;
     [SerializeField]
     private List<Slider> sliders;
-    private const string pickupState = "pickup.json";
-    private const string pickdownState = "pickdown.json";
 
-    private ArmSquenceList pickupSequence;
-    private ArmSquenceList pickdownSequence;
+    private IProxy<ArmSquenceList> pickupSequenceProxy;
+    private IProxy<ArmSquenceList> pickdownSequenceProxy;
+
+    private ArmSquenceList pickupSequence { get { return pickupSequenceProxy.Data; } }
+    private ArmSquenceList pickdownSequence { get { return pickdownSequenceProxy.Data; } }
     private Robot robot { get { return Robot.Instence; } }
 
     protected override void Awake()
@@ -49,20 +51,20 @@ public class RecordPanel : SingleCloseAblePanel {
         {
             pickupSequence.armList.Clear();
             pickupSequence.armList.Add(new ArmSquence(GetSliderValues()));
-            SaveToJson(pickupState, pickupSequence);
+            //SaveToJson(pickupState, pickupSequence);
         }
         else
         {
             pickdownSequence.armList.Clear();
             pickdownSequence.armList.Add(new ArmSquence(GetSliderValues()));
-            SaveToJson(pickdownState, pickdownSequence);
+            //SaveToJson(pickdownState, pickdownSequence);
         }
+        Facade.SendNotification(GameManager.saveObserverName);
     }
-
     private void InitData()
     {
-        pickupSequence = GetSequenceFromPath(pickupState);
-        pickdownSequence = GetSequenceFromPath(pickdownState);
+        Facade.RetrieveProxy<ArmSquenceList>(GameManager.pickupSequenceProxy, (x) => { pickupSequenceProxy = x; });
+        Facade.RetrieveProxy<ArmSquenceList>(GameManager.pickdownSequenceProxy, (x) => { pickdownSequenceProxy = x; });
     }
 
     private void LoadSliderStates(bool pickup)
@@ -73,12 +75,12 @@ public class RecordPanel : SingleCloseAblePanel {
         {
             sequestion = pickupSequence.armList[0];
         }
-        else if(pickdownSequence.armList.Count > 0)
+        else if (pickdownSequence.armList.Count > 0)
         {
             sequestion = pickdownSequence.armList[0];
         }
 
-        if(sequestion != null)
+        if (sequestion != null)
         {
             for (int i = 0; i < sequestion.values.Count; i++)
             {
@@ -88,32 +90,10 @@ public class RecordPanel : SingleCloseAblePanel {
                 }
             }
         }
-       
-    }
-    private ArmSquenceList GetSequenceFromPath(string fileName)
-    {
-        var jsonPath = Application.persistentDataPath + "/" + fileName;
-        ArmSquenceList list = null;
-        if(System.IO.File.Exists(jsonPath))
-        {
-            var str = System.IO.File.ReadAllText(jsonPath);
-            list = JsonUtility.FromJson<ArmSquenceList>(str);
-        }
-
-        if(list == null)
-        {
-            list = new ArmSquenceList();
-        }
-        return list;
 
     }
 
-    private void SaveToJson(string fileName, ArmSquenceList list)
-    {
-        var jsonPath = Application.persistentDataPath + "/" + fileName;
-        var str = JsonUtility.ToJson(list);
-        System.IO.File.WriteAllText(jsonPath, str);
-    }
+
 
     private float[] GetSliderValues()
     {
@@ -134,9 +114,9 @@ public class RecordPanel : SingleCloseAblePanel {
         }
     }
 
-    private void OnSliderValueChanged(int index,float value)
+    private void OnSliderValueChanged(int index, float value)
     {
-        if(robot)
+        if (robot)
         {
             robot.SetArmValue(index, value);
         }

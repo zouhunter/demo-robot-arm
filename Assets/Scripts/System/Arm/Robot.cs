@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-
+using PureMVC;
 /// <summary>
 /// 手臂机器人
 /// <summary>
@@ -18,6 +18,8 @@ using System.Collections.Generic;
 public class Robot : UnityEngine.MonoBehaviour {
     [SerializeField]
     private Arm[] arms;
+    [SerializeField]
+    private AudioClip audioClip;
     [SerializeField]
     private Transform hand;
     [SerializeField]
@@ -28,22 +30,27 @@ public class Robot : UnityEngine.MonoBehaviour {
     private bool delyPickDown;
     private bool delyContinue;
 
-    private ArmSquenceList pickupSequence;
-    private ArmSquenceList pickdownSequence;
 
-    private const string pickupState = "pickup.json";
-    private const string pickdownState = "pickdown.json";
+    private IProxy<ArmSquenceList> pickupSequenceProxy;
+    private IProxy<ArmSquenceList> pickdownSequenceProxy;
+
+    public ArmSquenceList pickupSequence { get { return pickupSequenceProxy.Data; } }
+    public ArmSquenceList pickdownSequence { get { return pickdownSequenceProxy.Data; } }
+
     private const float delyTime = 3;
     private float timer;
     private ObjItem pickupedItem;
+    private bool stop;
     private void Awake()
     {
         InitArms();
         Instence = this;
-        InitData();
+        InitProxy();
     }
     private void Update()
     {
+        if (stop) return;
+
         if (!pickUped)
         {
             FindAndTryPickupObj();
@@ -73,29 +80,10 @@ public class Robot : UnityEngine.MonoBehaviour {
             }
         }
     }
-
-  
-    private void InitData()
+    private void InitProxy()
     {
-        pickupSequence = GetSequenceFromPath(pickupState);
-        pickdownSequence = GetSequenceFromPath(pickdownState);
-    }
-    private ArmSquenceList GetSequenceFromPath(string fileName)
-    {
-        var jsonPath = Application.persistentDataPath + "/" + fileName;
-        ArmSquenceList list = null;
-        if (System.IO.File.Exists(jsonPath))
-        {
-            var str = System.IO.File.ReadAllText(jsonPath);
-            list = JsonUtility.FromJson<ArmSquenceList>(str);
-        }
-
-        if (list == null)
-        {
-            list = new ArmSquenceList();
-        }
-        return list;
-
+        Facade.RetrieveProxy<ArmSquenceList>(GameManager.pickupSequenceProxy, (x) => { pickupSequenceProxy = x;  });
+        Facade.RetrieveProxy<ArmSquenceList>(GameManager.pickdownSequenceProxy, (x) => { pickdownSequenceProxy = x;  });
     }
 
     private void FindAndTryPickupObj()
@@ -112,7 +100,7 @@ public class Robot : UnityEngine.MonoBehaviour {
                     
                     if (pickupSequence.armList.Count >0)
                     {
-                        SetValues(pickupSequence.armList[0].values.ToArray());
+                        SetValuesDely(pickupSequence.armList[0].values.ToArray());
                         delyPickDown = true;
                     }
                    
@@ -120,14 +108,16 @@ public class Robot : UnityEngine.MonoBehaviour {
             }
         }
     }
+
     private void TryMoveObject()
     {
         if (pickdownSequence.armList.Count > 0)
         {
-            SetValues(pickdownSequence.armList[0].values.ToArray());
+            SetValuesDely(pickdownSequence.armList[0].values.ToArray());
             pickupedItem.SetChanged();
             //pickupedItem.transform.localPosition = Vector3.zero;
             delyContinue = true;
+            AudioSource.PlayClipAtPoint(audioClip, Vector3.zero);
         }
     }
 
@@ -135,7 +125,7 @@ public class Robot : UnityEngine.MonoBehaviour {
     {
         if(pickupedItem != null)
         {
-            SetValues(new float[] { 0,0,0,0,0});
+            SetValuesDely(new float[] { 0,0,0,0,0});
 
             pickupedItem.OnPickDown();
             pickUped = false;
@@ -145,18 +135,18 @@ public class Robot : UnityEngine.MonoBehaviour {
     private void InitArms()
     {
         arms = GetComponentsInChildren<Arm>();
-        foreach (var item in arms)
-        {
+        foreach (var item in arms){
             item.SetValue(0);
         }
     }
 
-    internal void Reset()
+    public void Reset()
     {
         InitArms();
+        stop = false;
     }
 
-    public void SetValues(float[] values)
+    public void SetValuesDely(float[] values)
     {
         if(values != null)
         {
@@ -168,6 +158,10 @@ public class Robot : UnityEngine.MonoBehaviour {
                 }
             }
         }
+    }
+    public void Stop()
+    {
+        stop = true;
     }
     public void SetArmValue(int id,float value)
     {

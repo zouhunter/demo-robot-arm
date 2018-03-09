@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 using UnityEngine.EventSystems;
 /// <summary>
@@ -84,11 +85,25 @@ public class BuildingViewCamera : MonoBehaviour
     }
     void Update()
     {
+        if (IsPointerOverGameObject(Input.mousePosition)) return;
         if (target != null)
         {
             ChangeClickType();
             StoreChangeData();
         }
+    }
+    public bool IsPointerOverGameObject(Vector2 screenPosition)
+    {
+        //实例化点击事件  
+        PointerEventData eventDataCurrentPosition = new PointerEventData(UnityEngine.EventSystems.EventSystem.current);
+        //将点击位置的屏幕坐标赋值给点击事件  
+        eventDataCurrentPosition.position = new Vector2(screenPosition.x, screenPosition.y);
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        //向点击处发射射线  
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+
+        return results.Count > 0;
     }
     void LateUpdate()
     {
@@ -120,6 +135,7 @@ public class BuildingViewCamera : MonoBehaviour
         {
             clickType |= ClickType.centerDown;
         }
+        
     }
     /// <summary>
     /// 存储要改变的信息
@@ -131,8 +147,10 @@ public class BuildingViewCamera : MonoBehaviour
         //单击左键(记录xy方向的变化量)
         if ((clickType & ClickType.leftDown) == ClickType.leftDown)
         {
-            //xdlt = Input.GetAxis("Mouse X") * xSpeed * 0.02f;
-            //ydlt = -Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
+#if UNITY_ANDROID
+            xdlt += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
+            ydlt += -Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
+#endif
         }
         //单击右键（加速）
         if (clickType == ClickType.rightDown)

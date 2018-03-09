@@ -42,6 +42,7 @@ public class Arm : UnityEngine.MonoBehaviour
     private Quaternion startRot;
     private bool lerpRotation;
     private float timer;
+    private bool stop;
     private IEnumerator Start()
     {
         while (true)
@@ -83,5 +84,4 @@ public class Arm : UnityEngine.MonoBehaviour
         Debug.Log("value:" + value);
         lerpRotation = true;
     }
-
 }

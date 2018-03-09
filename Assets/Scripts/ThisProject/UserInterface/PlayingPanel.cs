@@ -14,7 +14,8 @@ using BridgeUI;
 /// <summary>
 /// 传动播放面板
 /// <summary>
-public class PlayingPanel : SingleCloseAblePanel{
+public class PlayingPanel : SingleCloseAblePanel
+{
     [SerializeField]
     private Button m_playBtn;
     [SerializeField]
@@ -28,28 +29,30 @@ public class PlayingPanel : SingleCloseAblePanel{
         robot.Reset();
         RegistBtnEvent();
     }
-
     private void RegistBtnEvent()
     {
         m_playBtn.onClick.AddListener(OnPlayBtnClicked);
         m_stopBtn.onClick.AddListener(OnStopBtnClicked);
     }
 
-    private void OnPlayBtnClicked()
+    public void OnPlayBtnClicked()
     {
         m_playBtn.gameObject.SetActive(false);
         m_stopBtn.gameObject.SetActive(true);
         objChage.active = true;
+        robot.Reset();
     }
     private void OnStopBtnClicked()
     {
         m_playBtn.gameObject.SetActive(true);
         m_stopBtn.gameObject.SetActive(false);
+        robot.Stop();
         objChage.active = false;
     }
 
     protected override void OnDestroy()
     {
+        OnStopBtnClicked();
         base.OnDestroy();
     }
 }
